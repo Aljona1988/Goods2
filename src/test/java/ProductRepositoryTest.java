@@ -113,12 +113,27 @@ public class ProductRepositoryTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
-    void shouldSearchByEmptyRepo() {
+    void shouldSNotSearchBy() {
         ProductRepository myRepo = new ProductRepository();
         ProductManager productManager = new ProductManager(myRepo);
+        Product product1 = new Product("Яблоко");
+        Product product2 = new Product("Вуча");
+        productManager.add(product1);
+        productManager.add(product2);
         int expected = 0;
-        int actual = productManager.searchBy("Яблоко").length;
+        int actual = productManager.searchBy("Груша").length;
+
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    void shouldSearchByEmpty() {
+        ProductRepository myRepo = new ProductRepository();
+        ProductManager productManager = new ProductManager(myRepo);
+
+        int expected = 0;
+        int actual = productManager.searchBy("").length;
 
         Assertions.assertEquals(expected, actual);
     }
