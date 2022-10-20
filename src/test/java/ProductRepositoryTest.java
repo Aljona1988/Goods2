@@ -9,7 +9,7 @@ public class ProductRepositoryTest {
     Product smartphone2 = new Smartphone(4, "Samsung A41", 8_000, "Samsung");
 
     @Test
-    public void shouldSaveNewProduct() {
+    public void shouldThrow() {
         ProductRepository repo = new ProductRepository();
         repo.save(book1);
         repo.save(smartphone1);
@@ -17,10 +17,10 @@ public class ProductRepositoryTest {
         repo.save(smartphone2);
         repo.deleteById(book1.getId());
 
-        Product[] expected = {smartphone1, book2, smartphone2};
-        Product[] actual = repo.getProducts();
+        Assertions.assertThrows(NotFoundException.class, () -> repo.deleteById(5));
 
-        Assertions.assertArrayEquals(expected, actual);
+
+
 
 
     }
