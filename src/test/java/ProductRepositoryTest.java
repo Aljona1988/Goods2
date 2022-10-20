@@ -105,13 +105,13 @@ public class ProductRepositoryTest {
         ProductRepository myRepo = new ProductRepository();
         ProductManager productManager = new ProductManager(myRepo);
         Product product1 = new Product("Яблоко");
-        Product product2 = new Product("Вуча");
+        Product product2 = new Product("Груша");
         productManager.add(product1);
         productManager.add(product2);
-        int expected = 1;
-        int actual = productManager.searchBy("Яблоко").length;
+        Product[] expected = {product1};
+        Product[] actual = productManager.searchBy("Яблоко");
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
@@ -122,10 +122,10 @@ public class ProductRepositoryTest {
         Product product2 = new Product("Вуча");
         productManager.add(product1);
         productManager.add(product2);
-        int expected = 0;
-        int actual = productManager.searchBy("Груша").length;
+        Product[] expected = new Product[0];
+        Product[] actual = productManager.searchBy("Груша");
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
@@ -138,10 +138,11 @@ public class ProductRepositoryTest {
         productManager.add(product1);
         productManager.add(product2);
         productManager.add(product3);
-        int expected = 2;
-        int actual = productManager.searchBy("Яблоко").length;
+        Product[] expected = {product1, product2};
+        Product[] actual = productManager.searchBy("Яблоко");
 
-        Assertions.assertEquals(expected, actual);
+
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
@@ -149,10 +150,11 @@ public class ProductRepositoryTest {
         ProductRepository myRepo = new ProductRepository();
         ProductManager productManager = new ProductManager(myRepo);
 
-        int expected = 0;
-        int actual = productManager.searchBy("").length;
+        Product[] expected = new Product[0];
+        Product[] actual = productManager.searchBy("");
 
-        Assertions.assertEquals(expected, actual);
+
+        Assertions.assertArrayEquals(expected, actual);
     }
 
 
